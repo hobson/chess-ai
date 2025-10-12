@@ -11,7 +11,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv venv -p 3.12
 source .venv/bin/activate
 uv pip install chess-minimax
-chess_minimax
+chess-minimax
 ```
 
 Alternatively you can just install and run it in your default Python environment.
