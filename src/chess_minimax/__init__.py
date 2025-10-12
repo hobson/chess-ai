@@ -1,2 +1,2 @@
-from chess_ai.main import main
+from chess_minimax.main import main
 
