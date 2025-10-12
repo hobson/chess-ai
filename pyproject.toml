@@ -1,12 +1,12 @@
 [project]
-name = "chess-ai"
-version = "0.1.0"
-description = "Add your description here"
+name = "chess-minimax"
+version = "0.1.1"
+description = "A pure Python chess AI (minimax algorithm) integrated with a PyGame to interact with a chess board."
 readme = "README.md"
 authors = [
     { name = "hobs", email = "git@totalgood.com" }
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "pygame>=2.6.1",
 ]
