@@ -2,9 +2,10 @@
 
 This a very basic chess game with an ai implementation using the minimax algorithm; built in python and pygame.
 
-## Install
+## Install and play
 
-Install and use uv to create Python virtual environment.
+The fastest way to install and play `chess-minimax` is to install `uv` and use it to create a Python virtual environment where you can install and play `chess-minimax`:
+
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -18,7 +19,7 @@ Alternatively you can just install and run it in your default Python environment
 
 ```bash
 pip install chess-minimax
-chess_minimax
+chess-minimax
 ```
 
 ## Architecture

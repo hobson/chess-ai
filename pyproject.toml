@@ -10,7 +10,6 @@ requires-python = ">=3.10"
 dependencies = [
     "pygame>=2.6.1",
 ]
-# include = ["src/chess_minimax/assets/*"]
 
 [project.scripts]
 chess-minimax = "chess_minimax:main"
