@@ -3,7 +3,7 @@ from .ChessPiece import *
 from .Computer import get_ai_move  # , get_random_move
 from pathlib import Path
 
-ASSETS_DIR = Path(__file__).parent / 'assets'
+ASSETS_DIR = Path(__file__).parent / 'chess_minimax' / 'assets'
 
 dark_block = pygame.image.load(ASSETS_DIR / 'JohnPablok Cburnett Chess set/128px/square brown dark_png_shadow_128px.png')
 light_block = pygame.image.load(ASSETS_DIR / 'JohnPablok Cburnett Chess set/128px/square brown light_png_shadow_128px.png')
