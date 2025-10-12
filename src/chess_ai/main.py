@@ -1,7 +1,5 @@
-import graphics
-from Board import *
-
-
+from . import graphics
+from .Board import *
 
 def main():
     keep_playing = True
