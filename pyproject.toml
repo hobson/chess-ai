@@ -1,6 +1,6 @@
 [project]
 name = "chess-minimax"
-version = "0.1.6"
+version = "0.1.7"
 description = "A pure Python chess AI (minimax algorithm) integrated with a PyGame to interact with a chess board."
 readme = "README.md"
 authors = [
@@ -10,7 +10,7 @@ requires-python = ">=3.10"
 dependencies = [
     "pygame>=2.6.1",
 ]
-include = ["src/chess-minimax/assets/*"]
+# include = ["src/chess_minimax/assets/*"]
 
 [project.scripts]
 chess-minimax = "chess_minimax:main"
