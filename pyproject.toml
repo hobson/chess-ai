@@ -1,6 +1,6 @@
 [project]
 name = "chess-minimax"
-version = "0.1.7"
+version = "0.1.8"
 description = "A pure Python chess AI (minimax algorithm) integrated with a PyGame to interact with a chess board."
 readme = "README.md"
 authors = [
