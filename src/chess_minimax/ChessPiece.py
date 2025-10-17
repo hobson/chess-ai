@@ -30,6 +30,8 @@ class ChessPiece:
         pass
 
     def get_last_eaten(self):
+        if DEBUG:
+            print('get_last_eaten() may cause a bug')
         return self.eaten_pieces_history.pop()
 
     def set_last_eaten(self, piece):

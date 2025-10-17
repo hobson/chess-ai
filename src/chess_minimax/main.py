@@ -2,6 +2,7 @@ from . import graphics
 from .Board import *
 
 def main():
+    print('chess-minimax BUT BETTER!')
     keep_playing = True
 
     board = Board(game_mode=0, ai=True, depth=1, log=True)  # game_mode == 0: whites down / 1: blacks down
