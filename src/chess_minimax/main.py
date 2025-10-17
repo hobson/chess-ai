@@ -1,11 +1,15 @@
-from . import graphics
 from .Board import *
+from . import graphics
+import sys
 
-def main():
-    print('chess-minimax BUT BETTER!')
+DEBUG = '--debug' in sys.argv[1:]
+
+
+def main(debug=DEBUG):
+    print(f'chess-minimax BUT BETTER! running main(debug={debug})')
     keep_playing = True
 
-    board = Board(game_mode=0, ai=True, depth=1, log=True)  # game_mode == 0: whites down / 1: blacks down
+    board = Board(game_mode=0, ai=True, depth=1, log=True or debug, debug=debug)  # game_mode == 0: whites down / 1: blacks down
 
     while keep_playing:
         graphics.initialize()
@@ -15,5 +19,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-
+    main(debug=DEBUG)

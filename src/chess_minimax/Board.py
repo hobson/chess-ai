@@ -7,7 +7,8 @@ class Board:
     whites = []
     blacks = []
 
-    def __init__(self, game_mode, ai=False, depth=2, log=False):    # game_mode == 0 : whites down/blacks up
+    def __init__(self, game_mode, ai=False, depth=2, log=False, debug=True):    # game_mode == 0 : whites down/blacks up
+        self.debug = debug
         self.board = []
         self.game_mode = game_mode
         self.depth = depth
@@ -29,26 +30,24 @@ class Board:
             self[1][j] = Pawn('white', 1, j, '\u265F')
             self[6][j] = Pawn('black', 6, j, '\u2659')
 
-
         self[0][0] = Rook('white', 0, 0, '\u265C')
         self[0][3] = Queen('white', 0, 3, '\u265B')
         self[0][4] = self.whiteKing
 
-
         self[7][0] = Rook('black', 7, 0, '\u2656')
         self[7][3] = Queen('black', 7, 3, '\u2655')
-        self[7][4] = self.blackKing        
-        if not DEBUG:
-                self[0][7] = Rook('white', 0, 7, '\u265C')
-                self[0][1] = Knight('white', 0, 1, '\u265E')
-                self[0][6] = Knight('white', 0, 6, '\u265E')
-                self[0][2] = Bishop('white', 0, 2, '\u265D')
-                self[0][5] = Bishop('white', 0, 5, '\u265D')
-                self[7][7] = Rook('black', 7, 7, '\u2656')
-                self[7][1] = Knight('black', 7, 1, '\u2658')
-                self[7][6] = Knight('black', 7, 6, '\u2658')
-                self[7][2] = Bishop('black', 7, 2, '\u2657')
-                self[7][5] = Bishop('black', 7, 5, '\u2657')
+        self[7][4] = self.blackKing
+        if not self.debug:
+            self[0][7] = Rook('white', 0, 7, '\u265C')
+            self[0][1] = Knight('white', 0, 1, '\u265E')
+            self[0][6] = Knight('white', 0, 6, '\u265E')
+            self[0][2] = Bishop('white', 0, 2, '\u265D')
+            self[0][5] = Bishop('white', 0, 5, '\u265D')
+            self[7][7] = Rook('black', 7, 7, '\u2656')
+            self[7][1] = Knight('black', 7, 1, '\u2658')
+            self[7][6] = Knight('black', 7, 6, '\u2658')
+            self[7][2] = Bishop('black', 7, 2, '\u2657')
+            self[7][5] = Bishop('black', 7, 5, '\u2657')
         self.save_pieces()
 
         if self.game_mode != 0:
@@ -69,8 +68,8 @@ class Board:
         if keep_history:
             if isinstance(self.board[old_x][old_y], ChessPiece):
                 # fixes atr error from this line for black for some reason
-                self.board[old_x][old_y].set_last_eaten(self.board[x][y]) 
-            
+                self.board[old_x][old_y].set_last_eaten(self.board[x][y])
+
         else:
             if isinstance(self.board[x][y], ChessPiece):
                 if self.board[x][y].color == 'white':
@@ -78,22 +77,20 @@ class Board:
                 else:
                     self.blacks.remove(self.board[x][y])
         self.board[x][y] = self.board[old_x][old_y]
-        self.board[old_x][old_y] = 'empty-block'     
+        self.board[old_x][old_y] = 'empty-block'
 
-        if isinstance(self.board[x][y], ChessPiece):               ########## fixes str error to update class/pos (look at ss)
+        if isinstance(self.board[x][y], ChessPiece):  # fixes str error to update class/pos (look at ss)
             self.board[x][y].set_position(x, y, keep_history)
 
-       
-
-        if not keep_history and isinstance(piece, Pawn):           ### if not statement doesn't let the ai keep history when checking for moves and ultimatley promotes queen which becomes a ghost 
+        # if not statement doesn't let the ai keep history when checking for moves and ultimatley promotes queen which becomes a ghost
+        if not keep_history and isinstance(piece, Pawn):
             if x == 7 and piece.color == 'white':
                 print('Promoted to White Queen')
-                if piece in self.whites:                             ######### remove ghost pawn that stays behind after promoting 
+                if piece in self.whites:  # remove ghost pawn that stays behind after promoting
                     self.whites.remove(piece)
-                self.board[x][y] = Queen('white', x, y, '\u265B')    #creates queen
-                self.whites.append(self.board[x][y])                 #helps ai recognize nw queen and fixes error (check and capture see ss)  
+                self.board[x][y] = Queen('white', x, y, '\u265B')  # creates queen
+                self.whites.append(self.board[x][y])  # helps ai recognize nw queen and fixes error (check and capture see ss)
 
-        
             if x == 0 and piece.color == 'black':
                 print('Promoted to Black Queen')
                 if piece in self.blacks:
@@ -106,17 +103,13 @@ class Board:
                 if isinstance(self.board[i][j], ChessPiece):
                     self.board[i][j].x, self.board[i][j].y = i, j
 
-        
-            
-
-
         ##### tell prof about make move here use notes############################################
 
     def unmake_move(self, piece):
         x = piece.x
         y = piece.y
 
-        if isinstance(self.board[x][y], ChessPiece):   ### fix atr error for black
+        if isinstance(self.board[x][y], ChessPiece):  # fix atr error for black
             self.board[x][y].set_old_position()
 
         old_x = piece.x
@@ -125,8 +118,8 @@ class Board:
         if isinstance(piece, Queen):
             if piece.color == 'white' and old_x == 7:
                 piece = Pawn('white', 6, y, '\u265F')
-            elif piece.color == 'black' and old_x == 0: 
-                piece = Pawn('black', 1, y, '\u2659')   
+            elif piece.color == 'black' and old_x == 0:
+                piece = Pawn('black', 1, y, '\u2659')
 
         self.board[old_x][old_y] = self.board[x][y]
         self.board[x][y] = piece.get_last_eaten()
@@ -304,5 +297,3 @@ class Board:
         if piece.color == 'white':
             return self.whiteKing
         return self.blackKing
-
-
