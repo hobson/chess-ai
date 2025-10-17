@@ -1,6 +1,6 @@
-__pycache__
+# __pycache__
 uv.lock
 *.pyc
-minimiax_tree.txt
+minimax_tree.txt
 
 
